@@ -160,6 +160,12 @@
             function Content() {
                 let __root;
 
+                /**
+                 * @param node
+                 * @param content
+                 * @param tab
+                 * @returns {Promise<void>}
+                 */
                 this.render = async ( node, content, tab ) => {
                     if ( node )
                         __root = node;
@@ -176,21 +182,18 @@
                         content = self.panels[0];
                     }
 
-                    if ( $.isComponent( content.inner ) ) {
+                    if ( $.isComponent( content.inner ) ) { // functional embedding of an registered component
                         console.info( 'isComponent!!' );
-                        // wenn ein Panel funktional mit einer registrierten Komponente eingebunden wird,
-                        // könnte eine Standard-CSS aus dem ccm-panels repo zur Komponenten-config
-                        // hinzugefügt werden
                         let instance = await content.inner.instance();
                         $.setContent( __root, instance.root );
                         await instance.start();
                     }
-                    else if ( $.isInstance( content.inner ) ) {
+                    else if ( $.isInstance( content.inner ) ) {  // functional embedding of an instanced component
                         console.info( 'isInstance!!' );
                         $.setContent( __root, content.inner.root );
                         await content.inner.start();
                     }
-                    else { // ccm-dashboard
+                    else { // declarative embedding -> elements were interpreted at initialising ccm.panels by evaluateLightDOM()
                         console.info( 'declarative embedding!!' );
                         $.setContent( __root, $.html( content.inner ) );
                     }
@@ -239,28 +242,5 @@
 
     };
 
-    //
-    let b = 'ccm.' + component.name + (component.version ? '-' + component.version.join('.') : '') + '.js';
-    if (window.ccm && null === window.ccm.files[b])
-        return window.ccm.files[b] = component;
-    (b = window.ccm && window.ccm.components[component.name]) && b.ccm && (component.ccm = b.ccm);
-    'string' === typeof component.ccm && (component.ccm = {
-        url: component.ccm
-    });
-    let c = (component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/) || ['latest'])[0];
-    if (window.ccm && window.ccm[c])
-        window.ccm[c].component(component);
-    else {
-        var a = document.createElement('script');
-        document.head.appendChild(a);
-        component.ccm.integrity && a.setAttribute('integrity', component.ccm.integrity);
-        component.ccm.crossorigin && a.setAttribute('crossorigin', component.ccm.crossorigin);
-        a.onload = function() {
-            window.ccm[c].component(component);
-            document.head.removeChild(a)
-        }
-        ;
-        a.src = component.ccm.url
-    }
-
+    let b='ccm.'+component.name+(component.version?'-'+component.version.join('.'):'')+'.js';if(window.ccm&&null===window.ccm.files[b])return window.ccm.files[b]=component;(b=window.ccm&&window.ccm.components[component.name])&&b.ccm&&(component.ccm=b.ccm);'string'===typeof component.ccm&&(component.ccm={url:component.ccm});let c=(component.ccm.url.match(/(0|[1-9]\d*)\.(0|[1-9]\d*)\.(0|[1-9]\d*)/)||['latest'])[0];if(window.ccm&&window.ccm[c])window.ccm[c].component(component);else{var a=document.createElement('script');document.head.appendChild(a);component.ccm.integrity&&a.setAttribute('integrity',component.ccm.integrity);component.ccm.crossorigin&&a.setAttribute('crossorigin',component.ccm.crossorigin);a.onload=function(){window.ccm[c].component(component);document.head.removeChild(a)};a.src=component.ccm.url}
 } )();
