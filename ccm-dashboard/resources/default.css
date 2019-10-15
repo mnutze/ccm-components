@@ -1,0 +1,13 @@
+:host {
+    height: inherit;
+    background: rgb(225, 217, 220);
+}
+
+div#element {
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0
+}
