@@ -1,0 +1,65 @@
+div#element {
+    /* background: greenyellow; */
+}
+
+/* 1. Dashboard controls */
+nav {
+    /* background: #dadade; */
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    /* padding: .5rem 1rem .5rem; initial */
+    /* padding: .5rem 1rem .5rem 0; v2 */
+    /* padding: .5rem 0 .5rem 0; */
+}
+
+nav > ul {
+    list-style-type: none;
+    margin: auto 0;
+    padding: 0;
+}
+
+nav > ul > li.active {
+    background: rgb(95,87,90);
+}
+
+nav > ul > li {
+    /* margin: 0 6px 0 0; */
+    float: left;
+    position: relative;
+    display: block;
+    padding: 8px;
+    background: rgb(255,255,255);
+    border-left: 1px solid rgb(95,87,90);
+    border-right: 1px solid rgb(95,87,90);
+    border-top: 1px solid rgb(95,87,90);
+}
+
+nav > ul > li > a {
+    color: rgb(95,87,90);
+    font-size: 13px;
+    text-decoration: none;
+}
+
+nav > ul > li.active > a {
+    color: rgb(255,255,255);
+}
+
+/* 2. Content styles */
+
+ccm-app, ccm-dashboard { /* full height for declarative embedded ccm-app, ccm-dashboard, ... continue */
+    height: inherit;
+}
+
+
+main {
+    border: 1px solid rgb(95,87,90);
+    border-right: 1px solid rgb(95,87,90);
+    border-bottom: 1px solid rgb(95,87,90);
+    padding: 10px;
+}
