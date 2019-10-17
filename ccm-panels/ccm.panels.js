@@ -136,7 +136,7 @@
                             'inner': {
                                 'tag': 'a',
                                 'href': '#',
-                                'inner': panel.name,
+                                'inner': panel.name + ' &times;',
                             },
                             'onclick': async function (ev) { /* switch panel click */
                                 await CONTENT.render(null, panel, this);
@@ -232,7 +232,7 @@
                     );
                     style.sheet.insertRule(
                         'main { ' +
-                        '  height: ' + (self.element.querySelector( 'main' ).getBoundingClientRect().height-20) + 'px;' +
+                        '  height: ' + self.element.querySelector( 'main' ).getBoundingClientRect().height + 'px;' +
                         '}'
                     );
                 };

@@ -1,6 +1,12 @@
+:root {
+    --dunkelgrau: rgb(95, 87, 90);
+    --lichtgrau: rgb(225, 217, 220);
+    --hellgrau: rgb(185, 177, 180);
+    --mittelgrau: rgb(145, 137, 140);
+}
+
 :host {
     height: inherit;
-    background: rgb(225, 217, 220);
 }
 
 div#element {
@@ -10,4 +16,50 @@ div#element {
 * {
     margin: 0;
     padding: 0
+}
+
+
+div[id^="item-"] {
+}
+
+div[id^="item-"] > div.handles {
+    height: inherit;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    z-index: -999;
+}
+
+div.placeholder {
+    background: #dadade;
+    position: absolute;
+    z-index: -999;
+}
+
+/* @Todo remove, cause deprecated */
+[draggable] {
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+    /* Required to make elements draggable in old WebKit */
+    -khtml-user-drag: element;
+    -webkit-user-drag: element;
+}
+
+.head h3 {
+    float: left;
+    margin: 0;
+}
+span.item-control {
+    float: right;
+    font-weight: bold;
+}
+
+.hold {
+    border: 4px #ccc solid;
+}
+
+.invisible {
+    display: none;
 }

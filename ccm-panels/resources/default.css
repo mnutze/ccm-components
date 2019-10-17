@@ -61,5 +61,5 @@ main {
     border: 1px solid rgb(95,87,90);
     border-right: 1px solid rgb(95,87,90);
     border-bottom: 1px solid rgb(95,87,90);
-    padding: 10px;
+    /* padding: 10px; */
 }
