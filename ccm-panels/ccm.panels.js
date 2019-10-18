@@ -219,22 +219,31 @@
                     style.appendChild( document.createTextNode('') );
                     self.element.parentNode.insertBefore(style, self.element) ;
 
+                    // able to inherit height
+                    style.sheet.insertRule(
+                        ':host { ' +
+                        '   height: inherit!important;' +
+                        '}'
+                    );
+
+                    // inherit height or set it static (98vh)
                     style.sheet.insertRule(
                         'div#element { ' +
-                        'display: grid!important;' +
-                        'grid-template-rows: 35px 1fr;' +
-                        'grid-template-areas: \'nav\' \'main\'!important;' +
-                        'height: 98vh;' +
-                        'grid-gap: 0!important; ' +
-                        'font-family: Helvetica, Arial, Geneva, sans-serif;' +
-                        'color: red;' +
+                        '   display: grid!important;' +
+                        '   grid-template-rows: 35px 1fr;' +
+                        '   grid-template-areas: \'nav\' \'main\'!important;' +
+                        '   height: ' + (self.element.getBoundingClientRect().height < 200 ? '98vh' : 'inherit!important') + ';' +
+                        '   grid-gap: 0!important; ' +
+                        '   font-family: Helvetica, Arial, Geneva, sans-serif;' +
                         '}'
                     );
+
                     style.sheet.insertRule(
                         'main { ' +
-                        '  height: ' + self.element.querySelector( 'main' ).getBoundingClientRect().height + 'px;' +
+                        '   height: ' + self.element.querySelector( 'main' ).getBoundingClientRect().height + 'px;' +
                         '}'
                     );
+
                 };
             }
 
